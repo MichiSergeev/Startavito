@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var closeIconImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var blockView: UICollectionView!
-    @IBOutlet weak var choiceButton: UIButton!
+    @IBOutlet weak var actionButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

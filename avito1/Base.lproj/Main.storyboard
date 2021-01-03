@@ -79,8 +79,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionButton" destination="OtF-To-ehg" id="Jm2-mo-D5W"/>
                         <outlet property="blockView" destination="pch-us-6SD" id="2pw-dm-hnl"/>
-                        <outlet property="choiceButton" destination="OtF-To-ehg" id="Jm2-mo-D5W"/>
                         <outlet property="closeIconImage" destination="sek-WF-0uJ" id="Lnz-5U-bwy"/>
                         <outlet property="titleLabel" destination="sPs-Pg-god" id="D2D-1j-yO5"/>
                     </connections>
