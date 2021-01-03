@@ -10,10 +10,10 @@ import Foundation
 struct InfoBlockJSON: Codable {
     let id: String
     let title: String
-    let description: String
+    let description: String?
     let icon: [String : String]
-    let price:String
-    let isSelected:Bool
+    let price: String
+    let isSelected: Bool
 }
 
 struct ResultJSON: Codable {
