@@ -49,20 +49,45 @@ class ViewController: UIViewController {
         
         if let data = try? Data(contentsOf: urlJSON), let json = try? JSONDecoder().decode(TopLevelJSON.self, from: data) {
             dataJSON = json
-//            visibleBlocks = json.result.list.filter({$0.isSelected})
-            visibleBlocks = json.result.list
+            
+            // на экране в коллекции будут только блоки, разрешенные для показа из json
+            visibleBlocks = json.result.list.filter({$0.isSelected})
+            // или
+            // на экране в коллекции будут все блоки из json
+//            visibleBlocks = json.result.list
+            
             titleLabel.text = json.result.title
             actionButton.setTitle(json.result.actionTitle, for: .normal)
         }
     }
     
     @IBAction func tappedActionButton(_ sender: Any) {
-        // создается Alert с названием выбранного блока
-        if isMarked {
-            print("Выбрана услуга \(visibleBlocks[selectedItem!].title)")
-        } else {
-            print("Без услуг")
+        
+        enum Titles: String {
+            case gotIt = "Понятно"
+            case notSelected = "Услуга не выбрана"
+            case ok = "OK"
         }
+        
+        var titleAlert: String = ""
+        var titleAction: String = ""
+        var message: String = ""
+        
+        if isMarked {
+            titleAlert = visibleBlocks[selectedItem!].title
+            titleAction = Titles.gotIt.rawValue
+            let description = visibleBlocks[selectedItem!].description ?? ""
+            let price = description == "" ? visibleBlocks[selectedItem!].price : "\n" + visibleBlocks[selectedItem!].price
+            message = description + price
+        } else {
+            titleAlert = Titles.notSelected.rawValue
+            titleAction = Titles.ok.rawValue
+        }
+        
+        let alert = UIAlertController(title: titleAlert, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: titleAction, style: .default, handler: nil)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
@@ -89,7 +114,7 @@ extension ViewController: UICollectionViewDataSource {
             cell.checkmarkImageView.image = checkmark
         }
         
-        // известна проблема при мерцании картинок коллекции/таблицы при быстром скролливании, но в этом проекте лишь 2 видимых (ну или всего 5) картинок малого размера, поэтому я не реализовал дополнительных код для предотвращения подобного явления
+        //мне известно о возможной проблеме при мерцании картинок коллекции/таблицы при быстром скролливании, но в этом проекте лишь 2 видимых (или всего 5) картинок малого размера, поэтому я не реализовал дополнительных код для предотвращения подобного явления
         
         if let url = URL(string: visibleBlocks[indexPath.item].icon.values.first!) {
             URLSession.shared.dataTask(with: url) { (data, responce, error) in
@@ -103,7 +128,7 @@ extension ViewController: UICollectionViewDataSource {
         
         return cell
     }
-
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         return 1
@@ -115,7 +140,7 @@ extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if let selectedCell = collectionView.cellForItem(at: indexPath) as? Block {
-                        
+            
             if selectedItem == indexPath.item {
                 if isMarked {
                     isMarked = false
@@ -152,13 +177,13 @@ extension ViewController: UICollectionViewDelegate {
 
 extension ViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         let width = collectionView.bounds.width
         let height: CGFloat = 123
-
+        
         return CGSize(width: width, height: height)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
         return 10
