@@ -18,7 +18,7 @@
 		05B47F7E25A1B2D3002D0474 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 05B47F7925A1B2D2002D0474 /* README.md */; };
 		05B47F7F25A1B2D3002D0474 /* result.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B47F7A25A1B2D2002D0474 /* result.json */; };
 		05B47F8025A1B2D3002D0474 /* screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B47F7B25A1B2D2002D0474 /* screen.png */; };
-		05B47F8325A1B6B0002D0474 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B47F8225A1B6B0002D0474 /* Block.swift */; };
+		05B47F8325A1B6B0002D0474 /* SpecialServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B47F8225A1B6B0002D0474 /* SpecialServiceCell.swift */; };
 		05B47F9125A1C42C002D0474 /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B47F9025A1C42C002D0474 /* JSONModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,7 @@
 		05B47F7925A1B2D2002D0474 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		05B47F7A25A1B2D2002D0474 /* result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = result.json; sourceTree = "<group>"; };
 		05B47F7B25A1B2D2002D0474 /* screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen.png; sourceTree = "<group>"; };
-		05B47F8225A1B6B0002D0474 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		05B47F8225A1B6B0002D0474 /* SpecialServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialServiceCell.swift; sourceTree = "<group>"; };
 		05B47F9025A1C42C002D0474 /* JSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,13 +51,69 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		055EBF4E25ADFD5200E689C9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				05B47F9025A1C42C002D0474 /* JSONModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		055EBF4F25ADFD5A00E689C9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				05B47F8225A1B6B0002D0474 /* SpecialServiceCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		055EBF5025ADFD6100E689C9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				05B47F6525A1B299002D0474 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		055EBF5125ADFD6C00E689C9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				05B47F6725A1B299002D0474 /* Main.storyboard */,
+				05B47F6A25A1B29A002D0474 /* Assets.xcassets */,
+				05B47F6C25A1B29A002D0474 /* LaunchScreen.storyboard */,
+				05B47F7A25A1B2D2002D0474 /* result.json */,
+				05B47F7625A1B2D2002D0474 /* icons */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		055EBF5225ADFF3C00E689C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05B47F6F25A1B29A002D0474 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		055EBF5325ADFFE500E689C9 /* Avito Start */ = {
+			isa = PBXGroup;
+			children = (
+				05B47F6125A1B299002D0474 /* AppDelegate.swift */,
+				05B47F6325A1B299002D0474 /* SceneDelegate.swift */,
+				055EBF4E25ADFD5200E689C9 /* Model */,
+				055EBF4F25ADFD5A00E689C9 /* View */,
+				055EBF5025ADFD6100E689C9 /* Controller */,
+				055EBF5125ADFD6C00E689C9 /* Resources */,
+				055EBF5225ADFF3C00E689C9 /* Supporting Files */,
+			);
+			path = "Avito Start";
+			sourceTree = "<group>";
+		};
 		05B47F5525A1B299002D0474 = {
 			isa = PBXGroup;
 			children = (
-				05B47F8F25A1C3F4002D0474 /* JSON */,
-				05B47F8D25A1C3BA002D0474 /* TaskDescription */,
-				05B47F7625A1B2D2002D0474 /* icons */,
-				05B47F6025A1B299002D0474 /* avito1 */,
+				05B47F8D25A1C3BA002D0474 /* Task Description */,
+				055EBF5325ADFFE500E689C9 /* Avito Start */,
 				05B47F5F25A1B299002D0474 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,21 +126,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		05B47F6025A1B299002D0474 /* avito1 */ = {
-			isa = PBXGroup;
-			children = (
-				05B47F6125A1B299002D0474 /* AppDelegate.swift */,
-				05B47F6325A1B299002D0474 /* SceneDelegate.swift */,
-				05B47F8225A1B6B0002D0474 /* Block.swift */,
-				05B47F6525A1B299002D0474 /* ViewController.swift */,
-				05B47F6725A1B299002D0474 /* Main.storyboard */,
-				05B47F6A25A1B29A002D0474 /* Assets.xcassets */,
-				05B47F6C25A1B29A002D0474 /* LaunchScreen.storyboard */,
-				05B47F6F25A1B29A002D0474 /* Info.plist */,
-			);
-			path = avito1;
-			sourceTree = "<group>";
-		};
 		05B47F7625A1B2D2002D0474 /* icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,22 +135,13 @@
 			path = icons;
 			sourceTree = "<group>";
 		};
-		05B47F8D25A1C3BA002D0474 /* TaskDescription */ = {
+		05B47F8D25A1C3BA002D0474 /* Task Description */ = {
 			isa = PBXGroup;
 			children = (
 				05B47F7B25A1B2D2002D0474 /* screen.png */,
 				05B47F7925A1B2D2002D0474 /* README.md */,
 			);
-			path = TaskDescription;
-			sourceTree = "<group>";
-		};
-		05B47F8F25A1C3F4002D0474 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				05B47F7A25A1B2D2002D0474 /* result.json */,
-				05B47F9025A1C42C002D0474 /* JSONModel.swift */,
-			);
-			path = JSON;
+			path = "Task Description";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,7 +221,7 @@
 			files = (
 				05B47F9125A1C42C002D0474 /* JSONModel.swift in Sources */,
 				05B47F6625A1B299002D0474 /* ViewController.swift in Sources */,
-				05B47F8325A1B6B0002D0474 /* Block.swift in Sources */,
+				05B47F8325A1B6B0002D0474 /* SpecialServiceCell.swift in Sources */,
 				05B47F6225A1B299002D0474 /* AppDelegate.swift in Sources */,
 				05B47F6425A1B299002D0474 /* SceneDelegate.swift in Sources */,
 			);
@@ -340,7 +372,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CGC55CVGYA;
-				INFOPLIST_FILE = avito1/Info.plist;
+				INFOPLIST_FILE = "Avito Start/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -359,7 +391,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CGC55CVGYA;
-				INFOPLIST_FILE = avito1/Info.plist;
+				INFOPLIST_FILE = "Avito Start/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct InfoBlockJSON: Codable {
+struct SpecialService: Codable {
     let id: String
     let title: String
     let description: String?
@@ -20,7 +20,7 @@ struct ResultJSON: Codable {
     let title: String
     let actionTitle: String
     let selectedActionTitle: String
-    let list: [InfoBlockJSON]
+    let list: [SpecialService]
 }
 
 struct TopLevelJSON: Codable {

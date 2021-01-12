@@ -1,5 +1,5 @@
 //
-//  Block.swift
+//  SpecialServiceCell.swift
 //  avito1
 //
 //  Created by Mikhail Sergeev on 03.01.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Block: UICollectionViewCell {
+class SpecialServiceCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -15,6 +15,8 @@ class Block: UICollectionViewCell {
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var checkmarkImageView: UIImageView!
+    
+    static let identifier = "SpecialServiceCell"
     
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         var newTargetSize = targetSize

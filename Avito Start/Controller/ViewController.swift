@@ -11,37 +11,32 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var closeIconImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var blockView: UICollectionView!
+    @IBOutlet weak var specialServiceCollectionView: UICollectionView!
     @IBOutlet weak var actionButton: UIButton!
     
-    var selectedItem: Int?
+    var markedItem: Int?
     var isMarked:Bool = false
     var dataJSON: TopLevelJSON?
     var checkmark = UIImage(named: "checkmark")
-    var visibleBlocks: [InfoBlockJSON] = []
+    var visibleSpecialServices: [SpecialService] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setCloseIcon()
-        settingsForBlock()
         parsingJSON()
-        setLayoutForBlock()
+        setLayoutForSpecialServiceCollectionView()
     }
     
-    private func settingsForBlock() {
-        blockView.dataSource = self
-        blockView.delegate = self
-    }
-    
-    private func setLayoutForBlock() {
-        let blockLayout = UICollectionViewFlowLayout()
-        blockLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        blockView.collectionViewLayout = blockLayout
+    private func setLayoutForSpecialServiceCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        specialServiceCollectionView.collectionViewLayout = layout
     }
     
     private func setCloseIcon() {
         closeIconImage.image = UIImage(named: "CloseIconTemplate")
     }
+    
     
     private func parsingJSON() {
         
@@ -51,7 +46,7 @@ class ViewController: UIViewController {
             dataJSON = json
             
             // на экране в коллекции будут только блоки, разрешенные для показа из json
-            visibleBlocks = json.result.list.filter({$0.isSelected})
+            visibleSpecialServices = json.result.list.filter({$0.isSelected})
             // или
             // на экране в коллекции будут все блоки из json
 //            visibleBlocks = json.result.list
@@ -74,10 +69,10 @@ class ViewController: UIViewController {
         var message: String = ""
         
         if isMarked {
-            titleAlert = visibleBlocks[selectedItem!].title
+            titleAlert = visibleSpecialServices[markedItem!].title
             titleAction = Titles.gotIt.rawValue
-            let description = visibleBlocks[selectedItem!].description ?? ""
-            let price = description == "" ? visibleBlocks[selectedItem!].price : "\n" + visibleBlocks[selectedItem!].price
+            let description = visibleSpecialServices[markedItem!].description ?? ""
+            let price = description == "" ? visibleSpecialServices[markedItem!].price : "\n" + visibleSpecialServices[markedItem!].price
             message = description + price
         } else {
             titleAlert = Titles.notSelected.rawValue
@@ -96,27 +91,27 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return visibleBlocks.count
+        return visibleSpecialServices.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Block", for: indexPath) as! Block
-        cell.titleLabel.text = visibleBlocks[indexPath.item].title
-        cell.descriptionLabel.text = visibleBlocks[indexPath.item].description
-        cell.priceLabel.text = visibleBlocks[indexPath.item].price
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpecialServiceCell.identifier, for: indexPath) as! SpecialServiceCell
+        cell.titleLabel.text = visibleSpecialServices[indexPath.item].title
+        cell.descriptionLabel.text = visibleSpecialServices[indexPath.item].description
+        cell.priceLabel.text = visibleSpecialServices[indexPath.item].price
         cell.checkmarkImageView.backgroundColor = .none
         cell.iconImageView.backgroundColor = .none
         cell.iconImageView.image = nil
         cell.checkmarkImageView.image = nil
         
-        if selectedItem == indexPath.item && isMarked {
+        if markedItem == indexPath.item && isMarked {
             cell.checkmarkImageView.image = checkmark
         }
         
         //мне известно о возможной проблеме при мерцании картинок коллекции/таблицы при быстром скролливании, но в этом проекте лишь 2 видимых (или всего 5) картинок малого размера, поэтому я не реализовал дополнительных код для предотвращения подобного явления
         
-        if let url = URL(string: visibleBlocks[indexPath.item].icon.values.first!) {
+        if let url = URL(string: visibleSpecialServices[indexPath.item].icon.values.first!) {
             URLSession.shared.dataTask(with: url) { (data, responce, error) in
                 if let imageData = data, let image = UIImage(data: imageData) {
                     DispatchQueue.main.async {
@@ -139,9 +134,9 @@ extension ViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let selectedCell = collectionView.cellForItem(at: indexPath) as? Block {
+        if let selectedCell = collectionView.cellForItem(at: indexPath) as? SpecialServiceCell {
             
-            if selectedItem == indexPath.item {
+            if markedItem == indexPath.item {
                 if isMarked {
                     isMarked = false
                     selectedCell.checkmarkImageView.image = nil
@@ -151,9 +146,9 @@ extension ViewController: UICollectionViewDelegate {
                 }
             }
             
-            if selectedItem != indexPath.item {
+            if markedItem != indexPath.item {
                 isMarked = true
-                selectedItem = indexPath.item
+                markedItem = indexPath.item
                 selectedCell.checkmarkImageView.image = checkmark
             }
             
@@ -162,12 +157,12 @@ extension ViewController: UICollectionViewDelegate {
             } else {
                 actionButton.setTitle(dataJSON?.result.actionTitle, for: .normal)
             }
-            
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if let deselectedCell = collectionView.cellForItem(at: indexPath) as? Block {
+        if let deselectedCell = collectionView.cellForItem(at: indexPath) as? SpecialServiceCell {
             deselectedCell.checkmarkImageView.image = nil
         }
     }
