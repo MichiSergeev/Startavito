@@ -26,4 +26,10 @@ class SpecialServiceCell: UICollectionViewCell {
         return newSize
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        iconImageView.image = nil
+        checkmarkImageView.image = nil
+    }
+    
 }
